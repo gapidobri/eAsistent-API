@@ -1,4 +1,5 @@
 const ea = require('./ea-query')
+const moment = require('moment')
 require('dotenv').config()
 
 module.exports = class EAClient {
@@ -10,8 +11,9 @@ module.exports = class EAClient {
         })()
     }
 
-    async timetable() {
-        return ea.requestAsync('https://www.easistent.com/m/timetable/weekly?from=2020-06-01&to=2020-06-07', this.login)
+    async timetable(from, to) {
+        var timetable = await ea.requestAsync(`https://www.easistent.com/m/timetable/weekly?from=${from}&to=${to}`, this.login)
+        return timetable
     }
 
     async grades() {

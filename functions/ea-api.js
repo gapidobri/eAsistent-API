@@ -10,13 +10,13 @@ module.exports = class EAClient {
         })()
     }
 
-    
     async timetable() {
-        console.log(await ea.requestAsync('https://www.easistent.com/m/timetable/weekly?from=2020-06-01&to=2020-06-07', this.login))
+        return ea.requestAsync('https://www.easistent.com/m/timetable/weekly?from=2020-06-01&to=2020-06-07', this.login)
     }
 
     async grades() {
-        return await ea.requestAsync('https://www.easistent.com/m/grades', this.login)
+        var grades = await ea.requestAsync('https://www.easistent.com/m/grades', this.login)
+        return grades.items
     }
 
     async homework() {
@@ -33,7 +33,12 @@ module.exports = class EAClient {
     }
 
     async messages() {
-        return await ea.requestAsync('https://www.easistent.com/m/messages', this.login)
+        //return await ea.requestAsync('https://www.easistent.com/m/messages', this.login)
+    }
+    
+    async praisesAndImprovements() {
+        var pai = await ea.requestAsync('https://www.easistent.com/m/praises_and_improvements', this.login)
+        return pai.items
     }
 
 }
